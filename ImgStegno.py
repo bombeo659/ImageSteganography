@@ -1,4 +1,4 @@
-#- import modules
+# - import modules
 from tkinter import *
 import tkinter.filedialog
 from tkinter import messagebox
@@ -12,7 +12,7 @@ class IMG_Stegno:
     output_image_size = 0
     key = ""
 
-    #main frame
+    # main frame
     def main(self, root):
         root.title('Image Steganography by Group2')
         root.geometry('500x700')
@@ -41,13 +41,13 @@ class IMG_Stegno:
         root.grid_rowconfigure(1, weight=1)
         root.grid_columnconfigure(0, weight=1)
 
-    #back function to loop back to main frame
+    # back function to loop back to main frame
     def back(self, frame):
         frame.destroy()
         self.main(root)
 
     ###encode###
-    #frame for encode page
+    # frame for encode page
     def encode_frame1(self, frame):
         frame.destroy()
         e_frame = Frame(root)
@@ -67,7 +67,7 @@ class IMG_Stegno:
         button_back.grid(pady=15)
         e_frame.grid()
 
-    #function to encode image
+    # function to encode image
     def encode_frame2(self, e_frame):
         e_pg = Frame(root)
         myfile = tkinter.filedialog.askopenfilename(
@@ -115,7 +115,7 @@ class IMG_Stegno:
             e_frame.destroy()
 
     ###decode###
-    #frame for decode page
+    # frame for decode page
 
     def decode_frame1(self, frame):
         frame.destroy()
@@ -138,7 +138,7 @@ class IMG_Stegno:
         button_back.grid()
         d_frame.grid()
 
-    #function to decode image
+    # function to decode image
 
     def decode_frame2(self, d_frame):
         d_pg1 = Frame(root)
@@ -202,7 +202,7 @@ class IMG_Stegno:
                 messagebox.showerror(
                     "Error", "No message from the selected image!")
 
-    #function to decode data
+    # function to decode data
     def decode(self, image):
         image_data = iter(image.getdata())
         data = ''
@@ -222,7 +222,7 @@ class IMG_Stegno:
             if pixels[-1] % 2 != 0:
                 return data
 
-    #function to generate data
+    # function to generate data
     def generate_Data(self, data):
         new_data = []
 
@@ -230,7 +230,7 @@ class IMG_Stegno:
             new_data.append(format(ord(i), '08b'))
         return new_data
 
-    #function to modify the pixels of image
+    # function to modify the pixels of image
     def modify_Pix(self, pix, data):
         dataList = self.generate_Data(data)
         dataLen = len(dataList)
@@ -260,14 +260,14 @@ class IMG_Stegno:
             yield pix[3:6]
             yield pix[6:9]
 
-    #function to enter the data pixels in image
+    # function to enter the data pixels in image
     def encode_enc(self, newImg, data):
         w = newImg.size[0]
         (x, y) = (0, 0)
 
         for pixel in self.modify_Pix(newImg.getdata(), data):
 
-            #putting modified pixels in the new image
+            # putting modified pixels in the new image
             newImg.putpixel((x, y), pixel)
             if (x == w - 1):
                 x = 0
@@ -275,7 +275,7 @@ class IMG_Stegno:
             else:
                 x += 1
 
-    #function to enter hidden text
+    # function to enter hidden text
     def enc_fun(self, text_hidden_key, text_data, myImg):
         data1 = text_hidden_key.get("1.0", "end-1c")
         data2 = text_data.get("1.0", "end-1c")
@@ -293,12 +293,8 @@ class IMG_Stegno:
             self.d_image_w, self.d_image_h = newImg.size
             messagebox.showinfo("Result", "Encoding Successful!")
 
-    def frame_3(self, frame):
-        frame.destroy()
-        self.main(root)
 
-
-#GUI loop
+# GUI loop
 root = Tk()
 o = IMG_Stegno()
 o.main(root)
