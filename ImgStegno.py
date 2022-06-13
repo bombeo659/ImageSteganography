@@ -76,8 +76,8 @@ class IMG_Stegno:
             messagebox.showerror("Error", "You have selected nothing!")
         else:
             my_img = Image.open(myfile)
-            my_img.thumbnail((200, 200))
             new_image = my_img.copy()
+            new_image.thumbnail((200, 200))
             img = ImageTk.PhotoImage(new_image)
             label1 = Label(e_pg, text='Selected Image')
             label1.config(font=('Segoe UI', 14, 'bold'))
@@ -148,8 +148,8 @@ class IMG_Stegno:
             messagebox.showerror("Error", "You have selected nothing!")
         else:
             my_img = Image.open(myfiles, 'r')
-            my_img.thumbnail((200, 200))
             my_image = my_img.copy()
+            my_image.thumbnail((200, 200))
             img = ImageTk.PhotoImage(my_image)
 
             label1 = Label(d_pg1, text="Selected Image")
@@ -243,8 +243,7 @@ class IMG_Stegno:
 
             for j in range(0, 8):
                 if (dataList[i][j] == '0') and (pix[j] % 2 != 0):
-                    if (pix[j] % 2 != 0):
-                        pix[j] -= 1
+                    pix[j] -= 1
 
                 elif (dataList[i][j] == '1') and (pix[j] % 2 == 0):
                     pix[j] -= 1
